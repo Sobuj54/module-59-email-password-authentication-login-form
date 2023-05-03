@@ -1,16 +1,24 @@
 import React from "react";
 
 const RegisterBS = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password);
+  };
+
   return (
     <div className="w-50 mx-auto">
       <h2>Bootstrap form</h2>
       {/* bootstrap form */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
             Email address
           </label>
           <input
+            name="email"
             type="email"
             class="form-control"
             id="exampleInputEmail1"
@@ -22,6 +30,7 @@ const RegisterBS = () => {
             Password
           </label>
           <input
+            name="password"
             type="password"
             class="form-control"
             id="exampleInputPassword1"
