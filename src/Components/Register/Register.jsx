@@ -20,10 +20,11 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="w-50 mx-auto">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <input
+          className="p-2 mb-2 rounded w-50"
           onChange={handleEmailChange}
           type="email"
           name="email"
@@ -32,6 +33,7 @@ const Register = () => {
         />
         <br />
         <input
+          className="p-2 mb-2 rounded w-50"
           onBlur={handlePasswordOnBlur}
           type="password"
           name="password"
@@ -39,7 +41,7 @@ const Register = () => {
           placeholder="password"
         />
         <br />
-        <input type="submit" value="Register" />
+        <input className="btn btn-primary" type="submit" value="Register" />
       </form>
     </div>
   );
