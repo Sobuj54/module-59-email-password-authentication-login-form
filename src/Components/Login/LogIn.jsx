@@ -1,5 +1,9 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import {
+  getAuth,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import React, { useRef, useState } from "react";
 import app from "../Firebase/firebase.config";
 import { Link } from "react-router-dom";
 
@@ -8,6 +12,7 @@ const auth = getAuth(app);
 const LogIn = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const emailRef = useRef();
 
   const handleLogIn = (event) => {
     // stopping form tag from reloading the page
@@ -44,6 +49,22 @@ const LogIn = () => {
         setError(error.message);
       });
   };
+  // handling forget password via email
+  const handleResetPassword = (event) => {
+    const email = emailRef.current.value;
+    if (!email) {
+      alert("please provide a valid email address to reset password");
+      return;
+    }
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("password reset email sent.");
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.message);
+      });
+  };
 
   return (
     <div className="w-50 mx-auto">
@@ -54,6 +75,7 @@ const LogIn = () => {
             Email address
           </label>
           <input
+            ref={emailRef}
             name="email"
             type="email"
             className="form-control"
@@ -89,6 +111,14 @@ const LogIn = () => {
           Submit
         </button>
       </form>
+      <p>
+        <small>
+          Forgot password ?{" "}
+          <button onClick={handleResetPassword} className="btn btn-link">
+            Reset password
+          </button>
+        </small>
+      </p>
       <p>
         <small>
           new to this ? <Link to="/register">Register</Link>

@@ -50,7 +50,7 @@ const Register = () => {
         setError(error.message);
       });
   };
-
+  // sending verification email
   const sendVerificationEmail = (user) => {
     sendEmailVerification(user).then((result) => {
       console.log(result);
