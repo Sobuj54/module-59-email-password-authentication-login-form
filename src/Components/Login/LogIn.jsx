@@ -12,6 +12,7 @@ const auth = getAuth(app);
 const LogIn = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [truth, setTruth] = useState();
   const emailRef = useRef();
 
   const handleLogIn = (event) => {
@@ -66,6 +67,12 @@ const LogIn = () => {
       });
   };
 
+  const seePassword = (isTrue) => {
+    if (isTrue) {
+      setTruth(isTrue);
+    }
+  };
+
   return (
     <div className="w-50 mx-auto">
       <h2>Please log in</h2>
@@ -91,12 +98,17 @@ const LogIn = () => {
           {/* required prevents empty form submission */}
           <input
             name="password"
-            type="password"
+            type={truth ? "text" : "password"}
             className="form-control"
             id="exampleInputPassword1"
             required
           />
         </div>
+        <p>
+          <small>
+            <button onClick={() => seePassword(true)}>see password</button>
+          </small>
+        </p>
         <div className="mb-3 form-check">
           <input
             type="checkbox"
