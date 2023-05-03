@@ -21,7 +21,7 @@ const Register = () => {
         console.log(loggedUser);
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error.message);
       });
   };
 
@@ -44,6 +44,7 @@ const Register = () => {
           name="email"
           id="email"
           placeholder="email"
+          required
         />
         <br />
         <input
@@ -53,6 +54,7 @@ const Register = () => {
           name="password"
           id="password"
           placeholder="password"
+          required
         />
         <br />
         <input className="btn btn-primary" type="submit" value="Register" />
