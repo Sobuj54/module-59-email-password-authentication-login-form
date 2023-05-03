@@ -36,8 +36,9 @@ const LogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         const loggedUser = result.user;
+        console.log(loggedUser);
         setError("");
-        setSuccess("Successfully created.");
+        setSuccess("Successfully Logged in");
       })
       .catch((error) => {
         setError(error.message);
