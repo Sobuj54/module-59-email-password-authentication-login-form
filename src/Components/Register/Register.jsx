@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import app from "../Firebase/firebase.config";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+
+const auth = getAuth(app);
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -6,9 +10,19 @@ const Register = () => {
   const handleSubmit = (event) => {
     // event.preventDefault() will stop form tag from refreshing the page
     event.preventDefault();
+    // collect form data
     const email = event.target.email.value;
     const password = event.target.password.value;
     console.log(email, password);
+    // create user in firebase
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleEmailChange = (event) => {
