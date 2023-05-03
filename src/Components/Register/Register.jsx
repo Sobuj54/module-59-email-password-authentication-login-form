@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 const auth = getAuth(app);
 
 const Register = () => {
-  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     // event.preventDefault() will stop form tag from refreshing the page
@@ -19,14 +19,16 @@ const Register = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        setError("");
       })
       .catch((error) => {
         console.error(error.message);
+        setError(error.message);
       });
   };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    //setEmail(event.target.value);
   };
 
   const handlePasswordOnBlur = (event) => {
@@ -59,6 +61,7 @@ const Register = () => {
         <br />
         <input className="btn btn-primary" type="submit" value="Register" />
       </form>
+      <p className="text-danger">{error}</p>
     </div>
   );
 };
