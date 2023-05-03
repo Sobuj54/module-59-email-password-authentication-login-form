@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   getAuth,
+  updateProfile,
 } from "firebase/auth";
 import { Link } from "react-router-dom";
 
@@ -19,6 +20,7 @@ const Register = () => {
     // collect form data
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const name = event.target.name.value;
     console.log(email, password);
 
     setError("");
@@ -44,6 +46,7 @@ const Register = () => {
         event.target.reset();
         setSuccess("User has been created successfully.");
         sendVerificationEmail(result.user);
+        updateUserData(result.user, name);
       })
       .catch((error) => {
         console.error(error.message);
@@ -56,6 +59,18 @@ const Register = () => {
       console.log(result);
       alert("please verify your email address.");
     });
+  };
+  // updating user name
+  const updateUserData = (user, name) => {
+    updateProfile(user, {
+      displayName: name,
+    })
+      .then(() => {
+        console.log("succesfully done.");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   const handleEmailChange = (event) => {
@@ -70,6 +85,15 @@ const Register = () => {
     <div className="w-50 mx-auto">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
+        <input
+          className="p-2 mb-2 rounded w-50"
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Your Name"
+          required
+        />
+        <br />
         <input
           className="p-2 mb-2 rounded w-50"
           onChange={handleEmailChange}
