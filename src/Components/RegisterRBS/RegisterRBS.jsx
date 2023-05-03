@@ -13,7 +13,7 @@ const RegisterRBS = () => {
 
   return (
     <div className="w-50 mx-auto">
-      <h3>bootstrap form</h3>
+      <h3>react bootstrap form</h3>
       <h4 className="text-primary text-center">Please Register !!!</h4>
       {/* react bootstrap form */}
       <Form onSubmit={handleSubmit}>

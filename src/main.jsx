@@ -8,6 +8,7 @@ import Home from "./Components/Home/Home.jsx";
 import LogIn from "./Components/Login/LogIn.jsx";
 import Register from "./Components/Register/Register.jsx";
 import RegisterRBS from "./Components/RegisterRBS/RegisterRBS.jsx";
+import RegisterBS from "./Components/RegisterBS/RegisterBS";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/register-rbs",
         element: <RegisterRBS></RegisterRBS>,
+      },
+      {
+        path: "/register-bs",
+        element: <RegisterBS></RegisterBS>,
       },
     ],
   },
